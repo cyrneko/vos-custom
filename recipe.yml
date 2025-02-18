@@ -1,11 +1,11 @@
-name: Custom Vanilla Desktop # Replace this name with your image name
-id: custom # Replace this ID with your image ID
+name: stellar # Replace this name with your image name
+id: stellar # Replace this ID with your image ID
 stages:
 - id: build
-  base: ghcr.io/vanilla-os/desktop:main # Optionally, Replace this image URL with a different one i.e. nvidia:main, etc
+  base: ghcr.io/vanilla-os/nvidia-exp:dev # Optionally, Replace this image URL with a different one i.e. nvidia:main, etc
   singlelayer: false
   labels:
-    maintainer: self-maintained # Optionally, Replace this with your name
+    maintainer: https://cyrneko.eu # Optionally, Replace this with your name
   args:
     DEBIAN_FRONTEND: noninteractive # Set the image environment as non-interactive
   
@@ -23,11 +23,19 @@ stages:
 
   # Put your custom actions below this comment
 
+  - name: tailscale # Install Tailscale, taken from here: https://github.com/FreshlyBakedCake/PacketMix/blob/08373caac656547fb57edfcfbf51ba510a1690e3/recipe.yml#L32
+    type: shell
+    commands:
+    - mkdir -p --mode=0755 /usr/share/keyrings
+    - curl -fsSL https://pkgs.tailscale.com/stable/debian/sid.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null
+    - curl -fsSL https://pkgs.tailscale.com/stable/debian/sid.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list
+    - apt-get update && apt-get install -y tailscale
+
   - name: example-packages # Sample module using the built-in Apt module to install packages
     type: apt
     source:
       packages:
-      - vim
+      - fish
 
   - name: example-commands # Sample module demonstrating the Shell module with custom commands
     type: shell
