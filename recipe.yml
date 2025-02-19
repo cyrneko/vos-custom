@@ -1,4 +1,4 @@
-vibversion: 0.8.1
+vibversion: "0.8.1"
 name: stellar # Replace this name with your image name
 id: stellar # Replace this ID with your image ID
 stages:
