@@ -1,3 +1,4 @@
+version: 1
 name: stellar # Replace this name with your image name
 id: stellar # Replace this ID with your image ID
 stages:
