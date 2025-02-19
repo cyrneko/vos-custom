@@ -1,4 +1,4 @@
-version: 1
+version: "1.0"
 name: stellar # Replace this name with your image name
 id: stellar # Replace this ID with your image ID
 stages:
